@@ -1,7 +1,41 @@
 import { useState } from 'react';
 import { ReactComponent as VKLogo } from '../../assets/vectors/content-logo.svg';
-import styles from './Authorization.module.css';
 import { useForm } from 'react-hook-form';
+import { InputField } from '../../components';
+import styles from './Authorization.module.css';
+
+const validateEmail = (value) => {
+  return {
+    required: 'Обязательно напишите почту',
+  };
+};
+
+const validatePassword = (value) => {
+  return {
+    required: 'Обязательно напишите пароль',
+    minLength: {
+      value: 8,
+      message: 'Длина пароля должна быть более 8 символов',
+    },
+    maxLength: {
+      value: 16,
+      message: 'Длина пароля должна быть менее 16 символов',
+    },
+    pattern: {
+      value: /^(?=.*\d)(?=.*[A-Z])[A-Za-z\d]{8,}$/,
+      message:
+        'Пароль должен содержать хотя бы одну цифру и хотя бы одну заглавную букву',
+    },
+  };
+};
+
+const validateConfirmPassword = (value, watchPassword) => {
+  return {
+    required: 'Обязательно напишите пароль подтверждения',
+    validate: (val) =>
+      val !== watchPassword ? 'Ваши пароли не совпадают' : null,
+  };
+};
 
 const Login = ({ setAuthType, onSubmit }) => {
   const switchAuth = () => {
@@ -21,24 +55,24 @@ const Login = ({ setAuthType, onSubmit }) => {
       </div>
       <h3 className={styles.form__title}>Введите почту</h3>
       <p className={styles.form__text}>Введите данные для входа в аккаунт</p>
-      <input
+      <InputField
+        errorClassName={styles.error}
+        label='Почта'
         type='email'
-        placeholder='Почта'
-        {...register('mail', {
-          required: 'Обязательно напишите почту',
-        })}
+        register={register}
+        name='mail'
+        errors={errors}
+        validation={validateEmail}
       />
-      {errors.mail && <p className={styles.error}>{errors.mail.message}</p>}
-      <input
+      <InputField
+        errorClassName={styles.error}
+        label='Пароль'
         type='password'
-        placeholder='Пароль'
-        {...register('password', {
-          required: 'Обязательно напишите пароль',
-        })}
+        register={register}
+        name='password'
+        errors={errors}
+        validation={validatePassword}
       />
-      {errors.password && (
-        <p className={styles.error}>{errors.password.message}</p>
-      )}
       <label className={styles.form__save}>
         <input type='checkbox' />
         <span>Сохранить вход</span>
@@ -72,54 +106,40 @@ const Register = ({ setAuthType, onSubmit }) => {
       <p className={styles.form__text}>
         Ваша почта будет использоваться для входа в аккаунт
       </p>
-      <input
+      <InputField
+        errorClassName={styles.error}
+        label='Почта'
         type='email'
-        placeholder='Почта'
-        {...register('mail', {
-          required: 'Обязательно напишите почту',
-        })}
+        register={register}
+        name='mail'
+        errors={errors}
+        validation={validateEmail}
       />
-      {errors.mail && <p className={styles.error}>{errors.mail.message}</p>}
-      <input
+      <InputField
+        errorClassName={styles.error}
+        label='Пароль'
         type='password'
-        placeholder='Пароль'
-        {...register('password', {
-          required: 'Обязательно напишите пароль',
-          minLength: {
-            value: 8,
-            message: 'Длина пароля должна быть более 8 символов',
-          },
-          maxLength: {
-            value: 16,
-            message: 'Длина пароля должна быть менее 16 символов',
-          },
-          pattern: {
-            value: /^(?=.*\d)(?=.*[A-Z])[A-Za-z\d]{8,}$/,
-            message:
-              'Пароль должен содержать хотя бы одну цифру и хотя бы одну заглавную букву',
-          },
-        })}
+        register={register}
+        name='password'
+        errors={errors}
+        validation={validatePassword}
       />
-      {errors.password && (
-        <p className={styles.error}>{errors.password.message}</p>
-      )}
-      <input
+      <InputField
+        errorClassName={styles.error}
+        label='Подтвердите пароль'
         type='password'
-        placeholder='Подтвердите пароль'
-        {...register('confirmPassword', {
-          required: 'Обязательно напишите пароль подтверждения',
-          validate: (val) =>
-            val !== watch('password') ? 'Ваши пароли не совпадают' : null,
-        })}
+        register={register}
+        name='confirmPassword'
+        errors={errors}
+        validation={(value) =>
+          validateConfirmPassword(value, watch('password'))
+        }
       />
-      {errors.confirmPassword && (
-        <p className={styles.error}>{errors.confirmPassword.message}</p>
-      )}
       <label className={styles.form__save}>
         <input type='checkbox' />
         <span>Сохранить вход</span>
       </label>
-      <button type='submit'>Регистрация </button>
+      <button type='submit'>Регистрация</button>
       <p className={styles.switch}>
         Есть аккаунт, тогда совершите <span onClick={switchAuth}>Вход</span>
       </p>
@@ -134,10 +154,10 @@ const Authorization = () => {
     console.log(data);
     switch (authType) {
       case 'login':
-        //вызов функции входа
+        // вызов функции входа
         break;
       case 'register':
-        //вызов функции регистрации
+        // вызов функции регистрации
         break;
       default:
         break;
