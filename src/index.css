@@ -1,3 +1,19 @@
+:root {
+  /* Цвета */
+  --primary-color: #5181b8;
+  --secondary-color: #224b7a;
+  --link-color: #2a5885;
+
+  --content-bg-color: #e7e8ec;
+  --color-bg-shadow-color: #d3d9de;
+
+  --light-blue-color: #dae2ea;
+  --grey-color: #939393;
+
+  --header-bg-color: #4a76a8;
+  --header-bg-dark-color: #416a9a;
+}
+
 * {
   padding: 0;
   margin: 0;
