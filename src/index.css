@@ -4,11 +4,13 @@
   --secondary-color: #224b7a;
   --link-color: #2a5885;
 
-  --content-bg-color: #e7e8ec;
-  --color-bg-shadow-color: #d3d9de;
+  --border-color: #e7e8ec;
+  --border-shadow-color: #d3d9de;
 
   --light-blue-color: #dae2ea;
   --grey-color: #939393;
+  --red-color: #e64646;
+  --dark-red-color: #db3b3b;
 
   --header-bg-color: #4a76a8;
   --header-bg-dark-color: #416a9a;
@@ -33,6 +35,10 @@ ol {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+input {
+  border: none;
 }
 
 button {
