@@ -44,8 +44,8 @@ const Login = ({ setAuthType, onSubmit }) => {
         <span>Сохранить вход</span>
       </label>
       <button type='submit'>Вход</button>
-      <p className={styles.switch} onClick={switchAuth}>
-        Регистрация
+      <p className={styles.switch}>
+        Создайте аккаунт, <span onClick={switchAuth}>Регистрация</span>
       </p>
     </form>
   );
@@ -107,7 +107,7 @@ const Register = ({ setAuthType, onSubmit }) => {
         type='password'
         placeholder='Подтвердите пароль'
         {...register('confirmPassword', {
-          required: 'Обязательно напишите пароль подтверждение',
+          required: 'Обязательно напишите пароль подтверждения',
           validate: (val) =>
             val !== watch('password') ? 'Ваши пароли не совпадают' : null,
         })}
@@ -120,8 +120,8 @@ const Register = ({ setAuthType, onSubmit }) => {
         <span>Сохранить вход</span>
       </label>
       <button type='submit'>Регистрация </button>
-      <p className={styles.switch} onClick={switchAuth}>
-        Вход
+      <p className={styles.switch}>
+        Есть аккаунт, тогда совершите <span onClick={switchAuth}>Вход</span>
       </p>
     </form>
   );

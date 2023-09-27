@@ -70,12 +70,15 @@
 }
 
 .switch {
-  color: var(--link-color);
-  cursor: pointer;
   font-size: 14px;
 }
 
-.switch:hover {
+.switch span {
+  color: var(--link-color);
+  cursor: pointer;
+}
+
+.switch span:hover {
   text-decoration: underline;
 }
 
