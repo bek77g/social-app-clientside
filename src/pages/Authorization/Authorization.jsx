@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ReactComponent as VKLogo } from '../../assets/vectors/content-logo.svg';
 import { useForm } from 'react-hook-form';
-import { InputField } from '../../components';
+import { InputField } from '../../components/ui';
 import styles from './Authorization.module.css';
 
 const validateEmail = (value) => {
