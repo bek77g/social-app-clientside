@@ -6,14 +6,13 @@ const InputField = ({
   register,
   name,
   errors,
-  validation,
 }) => (
   <>
     <input
       className={className}
       type={type}
       placeholder={label}
-      {...register(name, validation)}
+      {...register(name)}
     />
     {errors[name] && <p className={errorClassName}>{errors[name].message}</p>}
   </>

@@ -2,51 +2,29 @@ import { useState } from 'react';
 import { ReactComponent as VKLogo } from '../../assets/vectors/content-logo.svg';
 import { useForm } from 'react-hook-form';
 import { InputField } from '../../components/ui';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+//styles
 import styles from './Authorization.module.css';
-
-const validateEmail = (value) => {
-  return {
-    required: 'Обязательно напишите почту',
-  };
-};
-
-const validatePassword = (value) => {
-  return {
-    required: 'Обязательно напишите пароль',
-    minLength: {
-      value: 8,
-      message: 'Длина пароля должна быть более 8 символов',
-    },
-    maxLength: {
-      value: 16,
-      message: 'Длина пароля должна быть менее 16 символов',
-    },
-    pattern: {
-      value: /^(?=.*\d)(?=.*[A-Z])[A-Za-z\d]{8,}$/,
-      message:
-        'Пароль должен содержать хотя бы одну цифру и хотя бы одну заглавную букву',
-    },
-  };
-};
-
-const validateConfirmPassword = (value, watchPassword) => {
-  return {
-    required: 'Обязательно напишите пароль подтверждения',
-    validate: (val) =>
-      val !== watchPassword ? 'Ваши пароли не совпадают' : null,
-  };
-};
 
 const Login = ({ setAuthType, onSubmit }) => {
   const switchAuth = () => {
     setAuthType('register');
   };
 
+  const loginSchema = yup.object().shape({
+    mail: yup
+      .string()
+      .required('Обязательно напишите почту')
+      .email('Введите корректную почту'),
+    password: yup.string().required('Обязательно напишите пароль'),
+  });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: 'onSubmit' });
+  } = useForm({ mode: 'onSubmit', resolver: yupResolver(loginSchema) });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
@@ -62,7 +40,6 @@ const Login = ({ setAuthType, onSubmit }) => {
         register={register}
         name='mail'
         errors={errors}
-        validation={validateEmail}
       />
       <InputField
         errorClassName={styles.error}
@@ -71,7 +48,6 @@ const Login = ({ setAuthType, onSubmit }) => {
         register={register}
         name='password'
         errors={errors}
-        validation={validatePassword}
       />
       <label className={styles.form__save}>
         <input type='checkbox' />
@@ -90,12 +66,31 @@ const Register = ({ setAuthType, onSubmit }) => {
     setAuthType('login');
   };
 
+  const registerSchema = yup.object().shape({
+    mail: yup
+      .string()
+      .required('Обязательно напишите почту')
+      .email('Введите корректную почту'),
+    password: yup
+      .string()
+      .required('Обязательно напишите пароль')
+      .min(8, 'Длина пароля должна быть более 8 символов')
+      .max(16, 'Длина пароля должна быть менее 16 символов')
+      .matches(
+        /^(?=.*\d)(?=.*[A-Z])[A-Za-z\d]{8,}$/,
+        'Пароль должен содержать хотя бы одну цифру и хотя бы одну заглавную букву'
+      ),
+    confirmPassword: yup
+      .string()
+      .required('Обязательно напишите пароль подтверждения')
+      .oneOf([yup.ref('password'), null], 'Ваши пароли не совпадают'),
+  });
+
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm({ mode: 'onSubmit' });
+  } = useForm({ mode: 'onSubmit', resolver: yupResolver(registerSchema) });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
@@ -113,7 +108,6 @@ const Register = ({ setAuthType, onSubmit }) => {
         register={register}
         name='mail'
         errors={errors}
-        validation={validateEmail}
       />
       <InputField
         errorClassName={styles.error}
@@ -122,7 +116,6 @@ const Register = ({ setAuthType, onSubmit }) => {
         register={register}
         name='password'
         errors={errors}
-        validation={validatePassword}
       />
       <InputField
         errorClassName={styles.error}
@@ -131,9 +124,6 @@ const Register = ({ setAuthType, onSubmit }) => {
         register={register}
         name='confirmPassword'
         errors={errors}
-        validation={(value) =>
-          validateConfirmPassword(value, watch('password'))
-        }
       />
       <label className={styles.form__save}>
         <input type='checkbox' />
