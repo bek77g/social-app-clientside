@@ -1,0 +1,31 @@
+footer {
+  font-size: 13px;
+}
+
+.wrapper {
+  display: flex;
+  padding: 26px 0 40px;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 35px;
+  border-top: 1px solid #dce1e6;
+}
+
+.copyright {
+  color: #6f7985;
+}
+
+.copyright span {
+  color: var(--link-color);
+}
+
+.links {
+  color: var(--link-color);
+  display: flex;
+  gap: 10px;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
