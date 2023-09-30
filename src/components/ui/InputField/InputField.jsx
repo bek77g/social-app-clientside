@@ -3,9 +3,9 @@ const InputField = ({
   errorClassName,
   label,
   type,
-  register,
+  register = () => {},
   name,
-  errors,
+  errors = {},
 }) => (
   <>
     <input
