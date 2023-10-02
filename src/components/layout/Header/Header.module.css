@@ -3,6 +3,7 @@ header {
   height: 42px;
   display: flex;
   align-items: center;
+  margin-bottom: 14px;
 }
 
 .wrapper {
