@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { ReactComponent as VKLogo } from '../../assets/vectors/content-logo.svg';
+import { ReactComponent as VKLogo } from 'assets/vectors/content-logo.svg';
 import { useForm } from 'react-hook-form';
-import { InputField } from '../../components/ui';
+import { InputField } from 'components/ui';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 //styles

@@ -1,5 +1,5 @@
-import { ReactComponent as VKLogo } from '../../../assets/vectors/content-logo.svg';
-import { InputField } from '../../ui';
+import { ReactComponent as VKLogo } from 'assets/vectors/content-logo.svg';
+import { InputField } from 'components/ui';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { HiSearch } from 'react-icons/hi';
 import { FaBell } from 'react-icons/fa';
