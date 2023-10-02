@@ -15,6 +15,7 @@ import { ReactComponent as DocumentsIcon } from 'assets/vectors/sidebar/document
 import { ReactComponent as VirusIcon } from 'assets/vectors/sidebar/virus.svg';
 //styles
 import styles from './Sidebar.module.css';
+import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 
 const MenuItem = ({ text, link, icon: IconComponent, notice }) => {
   return (
@@ -160,7 +161,9 @@ const Sidebar = () => {
       <div className={styles.links}>
         <a href='/'>Блог</a> <a href='/'>Разработчикам</a>
         <a href='/'>Реклама</a>
-        <a href='/'>Еще </a>
+        <a href='/'>
+          Еще <MdOutlineKeyboardArrowDown />
+        </a>
       </div>
     </aside>
   );
