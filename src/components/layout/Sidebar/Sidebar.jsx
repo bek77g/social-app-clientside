@@ -154,8 +154,8 @@ const Sidebar = () => {
   return (
     <aside className={styles.content}>
       <ul className={styles.menu}>
-        {menuList.map((linkItem) => (
-          <MenuItem {...linkItem} />
+        {menuList.map((linkItem, idx) => (
+          <MenuItem key={linkItem.text || idx} {...linkItem} />
         ))}
       </ul>
       <div className={styles.links}>
