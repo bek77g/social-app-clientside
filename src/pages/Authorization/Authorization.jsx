@@ -190,7 +190,6 @@ const Authorization = () => {
     if (user) {
       toast.success(`На вашу почту отправлено письмо`);
       navigate('/');
-      console.log(user);
     }
     if (error) {
       toast.error(error.message);
