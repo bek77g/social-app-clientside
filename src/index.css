@@ -66,6 +66,8 @@ button {
 
 main {
   flex: 1;
+  display: flex;
+  gap: 13px;
 }
 
 .container {
