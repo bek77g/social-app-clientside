@@ -71,7 +71,7 @@ const userSlice = createSlice({
     });
     builder.addCase(registerUser.rejected, (state, action) => {
       state.status = 'error';
-      state.errorMessage = action.payload || null;
+      state.error = action.payload || null;
     });
     builder.addCase(loginUser.fulfilled, (state, action) => {
       state.user = userSetState(action.payload);
