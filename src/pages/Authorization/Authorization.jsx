@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ReactComponent as VKLogo } from 'assets/vectors/content-logo.svg';
 import { useForm } from 'react-hook-form';
 import { InputField } from 'components/ui';
@@ -6,6 +6,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 //styles
 import styles from './Authorization.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser, registerUser } from 'redux/features/userSlice';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Login = ({ setAuthType, onSubmit }) => {
   const switchAuth = () => {
@@ -13,7 +17,7 @@ const Login = ({ setAuthType, onSubmit }) => {
   };
 
   const loginSchema = yup.object().shape({
-    mail: yup
+    email: yup
       .string()
       .required('Обязательно напишите почту')
       .email('Введите корректную почту'),
@@ -38,7 +42,7 @@ const Login = ({ setAuthType, onSubmit }) => {
         label='Почта'
         type='email'
         register={register}
-        name='mail'
+        name='email'
         errors={errors}
       />
       <InputField
@@ -50,7 +54,11 @@ const Login = ({ setAuthType, onSubmit }) => {
         errors={errors}
       />
       <label className={styles.form__save}>
-        <input type='checkbox' />
+        <input
+          type='checkbox'
+          {...register('saveSession')}
+          defaultChecked={true}
+        />
         <span>Сохранить вход</span>
       </label>
       <button type='submit'>Вход</button>
@@ -67,7 +75,9 @@ const Register = ({ setAuthType, onSubmit }) => {
   };
 
   const registerSchema = yup.object().shape({
-    mail: yup
+    name: yup.string().required('Обязательно напишите имя'),
+    surname: yup.string().required('Обязательно напишите фамилию'),
+    email: yup
       .string()
       .required('Обязательно напишите почту')
       .email('Введите корректную почту'),
@@ -103,10 +113,26 @@ const Register = ({ setAuthType, onSubmit }) => {
       </p>
       <InputField
         errorClassName={styles.error}
+        label='Имя'
+        type='text'
+        register={register}
+        name='name'
+        errors={errors}
+      />
+      <InputField
+        errorClassName={styles.error}
+        label='Фамилия'
+        type='text'
+        register={register}
+        name='surname'
+        errors={errors}
+      />
+      <InputField
+        errorClassName={styles.error}
         label='Почта'
         type='email'
         register={register}
-        name='mail'
+        name='email'
         errors={errors}
       />
       <InputField
@@ -126,7 +152,11 @@ const Register = ({ setAuthType, onSubmit }) => {
         errors={errors}
       />
       <label className={styles.form__save}>
-        <input type='checkbox' />
+        <input
+          type='checkbox'
+          {...register('saveSession')}
+          defaultChecked={true}
+        />
         <span>Сохранить вход</span>
       </label>
       <button type='submit'>Регистрация</button>
@@ -139,20 +169,33 @@ const Register = ({ setAuthType, onSubmit }) => {
 
 const Authorization = () => {
   const [authType, setAuthType] = useState('login');
+  const { user, error } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (data) => {
-    console.log(data);
     switch (authType) {
       case 'login':
-        // вызов функции входа
+        dispatch(loginUser(data));
         break;
       case 'register':
-        // вызов функции регистрации
+        dispatch(registerUser(data));
         break;
       default:
         break;
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      toast.success(`На вашу почту отправлено письмо`);
+      navigate('/');
+      console.log(user);
+    }
+    if (error) {
+      toast.error(error.message);
+    }
+  }, [navigate, user, error]);
 
   return (
     <main className={styles.main}>
