@@ -130,7 +130,7 @@ const Register = ({ setAuthType, onSubmit }) => {
       <InputField
         errorClassName={styles.error}
         label='Почта'
-        type='email'
+        type='mail'
         register={register}
         name='email'
         errors={errors}
@@ -192,7 +192,14 @@ const Authorization = () => {
       navigate('/');
     }
     if (error) {
-      toast.error(error.message);
+      toast.error(
+        Array.isArray(error)
+          ? error.reduce(
+              (acc, err) => (acc += `${err.msg || err.message}; \n`),
+              ''
+            )
+          : error.message
+      );
     }
   }, [navigate, user, error]);
 
