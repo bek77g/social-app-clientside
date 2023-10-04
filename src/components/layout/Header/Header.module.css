@@ -59,7 +59,11 @@ header {
   height: 28px;
   -o-object-fit: cover;
   object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
   border-radius: 50%;
+  background-color: #fff;
+  padding: 3px;
 }
 
 .avatar {
