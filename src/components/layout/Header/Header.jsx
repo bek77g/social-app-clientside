@@ -1,5 +1,4 @@
-import { InputField } from 'components/ui';
-import UniversalTransition from 'components/UniversalTransition/UniversalTransition';
+import { InputField, UniversalTransition } from 'components/ui';
 import { Link } from 'react-router-dom';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { FiSettings, FiHelpCircle, FiLogOut } from 'react-icons/fi';
