@@ -1,27 +1,63 @@
 import { InputField } from 'components/ui';
+import UniversalTransition from 'components/UniversalTransition/UniversalTransition';
 import { Link } from 'react-router-dom';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import { FiSettings, FiHelpCircle, FiLogOut } from 'react-icons/fi';
 import { HiSearch } from 'react-icons/hi';
 import { FaBell } from 'react-icons/fa';
 import { ReactComponent as VKLogo } from 'assets/vectors/content-logo.svg';
 import userPlaceholder from 'assets/vectors/user-placeholder.svg';
+import { useSelector } from 'react-redux';
+import { useRef, useState } from 'react';
 
 //styles
 import styles from './Header.module.css';
-import { useSelector } from 'react-redux';
+import useOutsideClick from 'hooks/useOutsideClick';
 
 const Profile = ({ user }) => {
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
   const avatar = user.avatar || userPlaceholder;
-  return !!user ? (
-    <>
-      <h3>{user.name}</h3>
-      <div className={styles.avatar}>
-        <img src={avatar} alt='AVATAR' />
-        <MdKeyboardArrowDown color='#fff' />
+
+  const profileRef = useRef();
+
+  const handleClickProfile = () =>
+    setShowProfileMenu((prevState) => !prevState);
+
+  useOutsideClick(profileRef, () => setShowProfileMenu(false));
+
+  return (
+    <div className={styles.profile} ref={profileRef}>
+      <div className={styles.profile__inner} onClick={handleClickProfile}>
+        <h3>{user.name}</h3>
+        <div className={styles.avatar}>
+          <img src={avatar} alt='AVATAR' />
+          <MdKeyboardArrowDown color='#fff' />
+        </div>
       </div>
-    </>
-  ) : (
-    <Link to='/auth'>Вход</Link>
+      <UniversalTransition
+        in={showProfileMenu}
+        timeout={300}
+        transitionType='fade'
+        className={styles.profile__menu}>
+        <ul>
+          <li>
+            <Link to='/settings'>
+              <FiSettings size='16' color='var(--secondary-color)' /> Настройки
+            </Link>
+          </li>
+          <li>
+            <Link to='/support'>
+              <FiHelpCircle size='16' color='var(--secondary-color)' /> Помощь
+            </Link>
+          </li>
+          <li>
+            <Link to='/logout'>
+              <FiLogOut size='16' color='var(--secondary-color)' /> Выйти
+            </Link>
+          </li>
+        </ul>
+      </UniversalTransition>
+    </div>
   );
 };
 
@@ -44,9 +80,7 @@ const Header = () => {
             </label>
             <FaBell color='#1E3C5F' size='20' cursor='pointer' />
           </div>
-          <div className={styles.profile}>
-            <Profile user={user} />
-          </div>
+          <Profile user={user} />
         </div>
       </div>
     </header>
