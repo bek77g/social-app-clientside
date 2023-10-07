@@ -70,9 +70,20 @@ main {
   gap: 13px;
 }
 
+section {
+  width: 100%;
+  max-width: 550px;
+}
+
 .container {
   max-width: 1000px;
   padding: 0 20px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.aside-container {
+  max-width: 230px;
   margin: 0 auto;
   width: 100%;
 }
