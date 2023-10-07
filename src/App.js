@@ -1,6 +1,6 @@
 import { ToastContainer } from 'react-toastify';
 import { Layout } from './components';
-import { Authorization, Home } from './pages';
+import { Authorization, Home, Settings } from './pages';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -8,7 +8,8 @@ function App() {
     <>
       <Routes>
         <Route path='/' element={<Layout />}>
-          <Route index element={<Home />} /> Outlet if path === '/'
+          <Route index element={<Home />} />
+          <Route path='settings' element={<Settings />} />
         </Route>
         <Route path='/auth' element={<Authorization />} />
       </Routes>
