@@ -1,0 +1,24 @@
+.info {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.avatar {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar input[type='file'] {
+  display: none;
+}
+
+.avatar img {
+  background-color: var(--grey-color);
+}
+
+.community {
+  width: 100%;
+}
