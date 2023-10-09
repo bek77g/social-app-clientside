@@ -14,6 +14,8 @@
 
   --header-bg-color: #4a76a8;
   --header-bg-dark-color: #416a9a;
+
+  --profile-gradient-color: rgba(86,93,26, .32);
 }
 
 * {
