@@ -6,14 +6,16 @@ import { HiSearch } from 'react-icons/hi';
 import { FaBell } from 'react-icons/fa';
 import { ReactComponent as VKLogo } from 'assets/vectors/content-logo.svg';
 import userPlaceholder from 'assets/vectors/user-placeholder.svg';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useRef, useState } from 'react';
 
 //styles
 import styles from './Header.module.css';
 import useOutsideClick from 'hooks/useOutsideClick';
+import { logoutUser } from 'redux/features/userSlice';
 
 const Profile = ({ user }) => {
+  const dispatch = useDispatch();
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const avatar = user.avatar || userPlaceholder;
 
@@ -21,6 +23,9 @@ const Profile = ({ user }) => {
 
   const handleClickProfile = () =>
     setShowProfileMenu((prevState) => !prevState);
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  };
 
   useOutsideClick(profileRef, () => setShowProfileMenu(false));
 
@@ -50,7 +55,7 @@ const Profile = ({ user }) => {
             </Link>
           </li>
           <li>
-            <Link to='/logout'>
+            <Link to='/logout' onClick={handleLogout}>
               <FiLogOut size='16' color='var(--secondary-color)' /> Выйти
             </Link>
           </li>
@@ -79,7 +84,7 @@ const Header = () => {
             </label>
             <FaBell color='#1E3C5F' size='20' cursor='pointer' />
           </div>
-          <Profile user={user} />
+          {user ? <Profile user={user} /> : <Link to='/auth'>Войти</Link>}
         </div>
       </div>
     </header>
