@@ -15,7 +15,7 @@
   --header-bg-color: #4a76a8;
   --header-bg-dark-color: #416a9a;
 
-  --profile-gradient-color: rgba(86,93,26, .32);
+  --profile-gradient-color: rgba(86, 93, 26, 0.32);
 }
 
 * {
@@ -44,6 +44,8 @@ ol {
 
 img {
   width: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
 }
 
 a {
