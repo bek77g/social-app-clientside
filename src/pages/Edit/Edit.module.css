@@ -1,14 +1,38 @@
+.basic {
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.basic h4 {
+  padding: 20px;
+}
+
+.cover {
+  height: 147px;
+  background-color: #272727;
+  background-image: linear-gradient(
+      180deg,
+      transparent 0%,
+      var(--profile-gradient-color) 100%
+    ),
+    linear-gradient(270deg, transparent 0%, var(--profile-gradient-color) 100%);
+}
+
 .info {
+  position: relative;
   display: flex;
   align-items: center;
+  padding: 10px 20px;
   gap: 25px;
 }
 
 .avatar {
-  width: 92px;
-  height: 92px;
-  border-radius: 50%;
+  min-width: 92px;
+  max-height: 92px;
+  margin-top: -46px;
   overflow: hidden;
+  border: 1px solid var(--border-shadow-color);
+  border-radius: 50%;
 }
 
 .avatar input[type='file'] {
@@ -16,7 +40,39 @@
 }
 
 .avatar img {
-  background-color: var(--grey-color);
+  background-color: var(--border-color);
+  width: 92px;
+  height: 92px;
+}
+
+.info form {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  justify-content: space-around;
+}
+
+.info button {
+  background-color: transparent;
+  color: var(--link-color);
+}
+
+.info button:hover {
+  text-decoration: underline;
+}
+
+.editable {
+  width: 100%;
+  gap: 15px;
+  display: flex;
+}
+
+.editable input {
+  padding: 5px 9px 7px;
+  width: 40%;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  font-size: 13px;
 }
 
 .community {
