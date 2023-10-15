@@ -6,6 +6,7 @@ import { useState } from 'react';
 import userPlaceholder from 'assets/vectors/user-placeholder.svg';
 import { uploadPhoto } from 'utils/uploadPhoto';
 import { toast } from 'react-toastify';
+import ReactInputMask from 'react-input-mask';
 
 const Edit = () => {
   const { user } = useSelector((state) => state.user);
@@ -22,7 +23,7 @@ const Edit = () => {
 
   const handleEditUser = (data) => {
     dispatch(editUser({ userId: user._id, data })).then(() =>
-      toast.success('Данные успешно изменены')
+      toast.success('Данные успешно изменены', { position: 'top-center' })
     );
     setIsEditable(false);
   };
@@ -39,7 +40,7 @@ const Edit = () => {
 
   return (
     <>
-      <section>
+      <section className={styles.editContainer}>
         <div className={styles.basic}>
           <h4>Профиль</h4>
           <div className={styles.cover}></div>
@@ -76,7 +77,18 @@ const Edit = () => {
             )}
           </div>
         </div>
-        <div className={styles.additional}></div>
+        <div className={styles.additional}>
+          <form>
+            <label>
+              <h3>Номер телефона:</h3>
+              <ReactInputMask mask='+\9\96 999 99 99 99' placeholder='+996' />
+            </label>
+            <label>
+              <h3>Дата рождения:</h3>
+              <input type='date' />
+            </label>
+          </form>
+        </div>
       </section>
       <div className='aside-container'>COMMUNITY</div>
     </>

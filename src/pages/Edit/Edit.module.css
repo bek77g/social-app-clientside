@@ -1,4 +1,5 @@
-.basic {
+.basic,
+.additional {
   background-color: #fff;
   border-radius: 5px;
 }
@@ -45,19 +46,19 @@
   height: 92px;
 }
 
-.info form {
+.editContainer form {
   width: 100%;
   display: flex;
   gap: 20px;
   justify-content: space-around;
 }
 
-.info button {
+.editContainer button {
   background-color: transparent;
   color: var(--link-color);
 }
 
-.info button:hover {
+.editContainer button:hover {
   text-decoration: underline;
 }
 
@@ -67,12 +68,37 @@
   display: flex;
 }
 
-.editable input {
+.editContainer input {
   padding: 5px 9px 7px;
   width: 40%;
   border-radius: 8px;
   border: 1px solid var(--border-color);
   font-size: 13px;
+}
+
+.additional {
+  margin-top: 15px;
+  padding: 20px;
+}
+
+.additional form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.additional form label {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.additional form label h3 {
+  font-weight: normal;
+  font-size: 13px;
+  width: 180px;
 }
 
 .community {
