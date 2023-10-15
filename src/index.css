@@ -57,6 +57,11 @@ input {
   border: none;
 }
 
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
 button {
   border: none;
   cursor: pointer;
