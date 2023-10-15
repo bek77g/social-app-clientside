@@ -68,7 +68,7 @@ header {
   object-position: center;
   border-radius: 50%;
   background-color: #fff;
-  padding: 3px;
+  /* padding: 3px; */
 }
 
 .avatar {
