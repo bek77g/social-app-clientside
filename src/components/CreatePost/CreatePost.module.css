@@ -1,0 +1,75 @@
+.form {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 7px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px 10px;
+}
+
+.form input,
+form textarea {
+  padding: 5px 9px 7px;
+  width: 40%;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  font-size: 13px;
+}
+
+.heading,
+.field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.heading input {
+  outline: none;
+}
+
+.cover {
+  width: 45%;
+  margin: 0 auto;
+  border-radius: 7px;
+}
+
+.field > textarea {
+  width: 100%;
+  resize: none;
+  outline: none;
+  overflow: hidden;
+}
+
+.handlers {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.upload {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.upload label {
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.upload label input[type='file'] {
+  display: none;
+}
+
+.submit {
+  padding: 5px 10px;
+  border-radius: 3px;
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.submit:hover {
+  background-color: var(--secondary-color);
+}
